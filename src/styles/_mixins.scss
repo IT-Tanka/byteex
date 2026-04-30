@@ -1,0 +1,33 @@
+@import 'variables';
+
+@mixin container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 40px;
+
+  @media (max-width: $mobile) {
+    padding: 0 20px;
+  }
+}
+
+@mixin section {
+  padding: $section-padding;
+
+  @media (max-width: $mobile) {
+    padding: $section-padding-mobile;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: $mobile) { @content; }
+  } @else if $breakpoint == tablet {
+    @media (max-width: $tablet) { @content; }
+  }
+}
