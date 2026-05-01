@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('@/assets/fonts/SofiaPro-Regular.woff2') format('woff2'),
+       url('@/assets/fonts/SofiaPro-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('@/assets/fonts/SofiaPro-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('@/assets/fonts/SofiaPro-ExtraLight.woff2') format('woff2');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('@/assets/fonts/SuisseIntl-Regular.woff2') format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Fira Mono';
+  src: url('@/assets/fonts/FiraMono-Medium.woff2') format('woff2');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Fira Mono';
+  src: url('@/assets/fonts/FiraMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+}

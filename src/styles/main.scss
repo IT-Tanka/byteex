@@ -1,5 +1,18 @@
-@import 'variables';
-@import 'mixins';
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'fonts' as *;
+
+body {
+  font-family: $font-sans;
+}
+
+h1, h2, h3, h4 {
+  font-family: $font-serif;
+}
+
+.code {
+  font-family: $font-mono;
+}
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -10,6 +23,8 @@
 html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -17,11 +32,28 @@ body {
   color: $text-dark;
   background-color: $white;
   line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+section {
+  padding: $section-padding;
+}
+
+@media (max-width: $mobile) {
+  section {
+    padding: $section-padding-mobile;
+  }
 }
 
 img {
   max-width: 100%;
   display: block;
+}
+
+button,
+a {
+  cursor: pointer;
 }
 
 a {
