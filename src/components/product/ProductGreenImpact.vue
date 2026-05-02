@@ -44,7 +44,7 @@
 }
 
 .green-impact__inner {
-  max-width: 1200px;
+  max-width: 1464px;
   margin: 0 auto;
   text-align: center;
 }

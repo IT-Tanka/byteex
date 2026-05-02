@@ -89,12 +89,12 @@ const nextCard = () => { mobileIndex.value = (mobileIndex.value + 1) % cards.len
 
 <style scoped lang="scss">
 .product-how-it-works {
-  padding: 80px 20px;
+  padding: 80px 20px 74px 20px;
   background: $white;
 }
 
 .how-inner {
-  max-width: 1200px;
+  max-width: 1464px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -114,8 +114,9 @@ const nextCard = () => { mobileIndex.value = (mobileIndex.value + 1) % cards.len
 
 .how-cards--desktop {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(3,346px);
+  gap: 41px;
+  margin: auto;
 }
 
 .how-cards--mobile {
@@ -128,7 +129,8 @@ const nextCard = () => { mobileIndex.value = (mobileIndex.value + 1) % cards.len
   display: flex;
   flex-direction: column;
   gap: 14px;
-  height: 346px;
+  width: 346px;
+  height: 321px;
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(237, 237, 237, 1);

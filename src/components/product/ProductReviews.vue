@@ -68,7 +68,7 @@ const images = [
 ];
 
 const currentReviewStart = ref(0);
-const windowWidth = ref(typeof window !== "undefined" ? window.innerWidth : 1200);
+const windowWidth = ref(typeof window !== "undefined" ? window.innerWidth : 1464);
 
 function updateWidth() {
   windowWidth.value = window.innerWidth;
@@ -189,12 +189,11 @@ function prevReview() {
 
 <style scoped lang="scss">
 .product-reviews {
-  padding: 80px 20px;
   background: $white;
 }
 
 .reviews-inner {
-  max-width: 1200px;
+  max-width: 1464px;
   margin: 0 auto;
   display: grid;
   gap: 48px;
@@ -210,7 +209,6 @@ function prevReview() {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-radius: 16px;
 }
 
 .reviews-carousel {

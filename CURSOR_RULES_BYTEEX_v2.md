@@ -39,7 +39,7 @@ $font-sans: 'Inter', -apple-system, sans-serif;    // текст
 // spacing
 $section-padding: 80px 0;
 $section-padding-mobile: 48px 0;
-$container-max: 1200px;
+$container-max: 1464px;
 $container-padding: 0 40px;
 $container-padding-mobile: 0 20px;
 
@@ -142,7 +142,7 @@ $font-sans: 'Inter', -apple-system, sans-serif;
 // Spacing
 $section-padding: 80px 0;
 $section-padding-mobile: 48px 0;
-$container-max: 1200px;
+$container-max: 1464px;
 
 // Breakpoints
 $mobile: 768px;

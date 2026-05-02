@@ -63,7 +63,7 @@ function selectImage(index) {
 
     <div class="benefits-inner container">
       <div class="benefits-copy">
-        <p class="section-label">Loungewear you can be proud of.</p>
+        <p class="section-label first">Loungewear you can be proud of.</p>
 
         <ul class="benefits-list">
           <li>
@@ -122,6 +122,7 @@ function selectImage(index) {
       </div>
 
       <div class="benefits-slider">
+        <p class="section-label hidden">Loungewear you can be proud of.</p>
         <div class="slider-wrap">
           <button
             class="slider-arrow slider-arrow--prev"
@@ -233,7 +234,7 @@ function selectImage(index) {
 }
 
 .benefits-inner {
-  max-width: 1200px;
+  max-width: 1464px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -410,6 +411,9 @@ function selectImage(index) {
   text-align: center;
   margin-top: 13px;
 }
+.hidden {
+  display: none;
+}
 
 @media (max-width: 1024px) {
   .benefits-inner {
@@ -423,6 +427,15 @@ function selectImage(index) {
 }
 
 @media (max-width: 860px) {
+  .product-benefits{
+    padding-top: 90px;
+  }
+  .first{
+    display: none;
+  }
+  .hidden {
+    display: block;
+  }
   .benefits-inner {
     grid-template-columns: 1fr;
   }
@@ -436,12 +449,24 @@ function selectImage(index) {
 
   .benefits-slider {
     align-items: center;
+    order: 1;
   }
-
+  .benefits-copy {
+    order: 2;
+  }
   .slider-wrap {
     gap: 25px;
   }
-
+  .benefits-list li {
+    grid-template-columns: none;
+    text-align: center;
+    margin: auto;
+    border-bottom: 1px solid rgba(237, 237, 237, 1);
+    padding-bottom: 20px;
+  }
+  .benefit-icon{
+    margin: auto;
+  }
   .slider-frame {
     width: 303px;
     height: 453px;
@@ -455,7 +480,7 @@ function selectImage(index) {
 
 @media (max-width: 640px) {
   .product-benefits {
-    padding: 48px 16px;
+    padding: 110px 16px;
   }
 
   .seen-in-list {

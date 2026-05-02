@@ -89,12 +89,12 @@ const heroImages = [model1, model0, model4];
 <style scoped lang="scss">
 .product-hero {
   background: $white;
-  padding: 33px 0 70px;
+  padding: 33px 62px 70px 106px;
   position: relative;
 }
 
 .hero-wrapper {
-  max-width: 1200px;
+  max-width: 1464px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -103,14 +103,15 @@ const heroImages = [model1, model0, model4];
 .byteex-logo {
   width: 200px;
   height: 35px;
-  margin-bottom: 25px;
+  margin-bottom: 55px;
+  margin-left: 63px;
   flex-shrink: 0;
 }
 
 .hero-content {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 48px;
+  display: flex;
+   justify-content: center;
+  gap: 110px;
   align-items: start;
 }
 
@@ -118,6 +119,8 @@ const heroImages = [model1, model0, model4];
   display: flex;
   flex-direction: column;
   gap: 28px;
+  max-width: 480px;
+  padding-bottom: 50px
 }
 
 h1 {
@@ -126,7 +129,7 @@ h1 {
   line-height: 45px;
   max-width: 592px;
   color: $navy;
-  margin: 0 0 15px;
+  margin: 0 0 12px;
   letter-spacing: 4%;
   font-weight: 400;
 }
@@ -137,6 +140,7 @@ h1 {
   margin: 0;
   display: grid;
   gap: 23px;
+  margin-bottom: 12px;
 }
 
 .hero-list li {
@@ -249,9 +253,7 @@ h1 {
   }
 
   .hero-content {
-    grid-template-columns: 1fr;
-    gap: 32px;
-    width: 100%;
+    flex-direction: column;
   }
 
   .hero-visual {
@@ -283,19 +285,21 @@ h1 {
   }
 
   .testimonial-card {
-    position: static;
-    transform: none;
+    position: absolute;
     max-width: 100%;
     width: 100%;
     padding: 16px;
     text-align: left;
+    max-width: 388px;
   }
 }
 
 @media (max-width: 480px) {
+    
   .hero-copy {
     max-width: 380px;
     margin: auto;
+
   }
   h1 {
     font-size: 24px;

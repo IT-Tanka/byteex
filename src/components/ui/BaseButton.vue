@@ -24,8 +24,8 @@ const props = defineProps({
 
 <style scoped lang="scss">
 .base-button {
-  margin: auto;
   height: 56px;
+  width: 362px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -65,6 +65,7 @@ const props = defineProps({
 @media (max-width: 640px) {
   .base-button{
     width: 369px !important;
+    margin: auto;
   }
 }
 </style>
