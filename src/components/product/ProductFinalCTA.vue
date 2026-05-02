@@ -1,168 +1,228 @@
 <script setup>
+import HeroCarousel from '../ui/HeroCarousel.vue'
 import BaseButton from '../ui/BaseButton.vue'
+
+import model3 from '@/assets/images/model-3.png'
+import model2 from '@/assets/images/model-2.png'
+import model1 from '@/assets/images/model-1.png'
+
+const ctaImages = [model3, model2, model1]
 </script>
 
 <template>
-  <section class="final-cta">
-    <div class="final-cta__inner">
-      <div class="final-cta__copy">
-        <h2>Find something you love.</h2>
-        <p>Discover consciously made loungewear designed for everyday comfort, effortless style, and lasting quality.</p>
-        <BaseButton label="Customize Your Outfit →" />
-      </div>
+  <section class="product-final-cta">
 
-      <div class="final-cta__visual">
-        <div class="image-grid">
-          <div class="image-card image-card--left">
-            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80" alt="Woman wearing loungewear" loading="lazy" />
-          </div>
-          <div class="image-card image-card--center">
-            <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80" alt="Comfortable lounge outfit" loading="lazy" />
-          </div>
-          <div class="image-card image-card--right">
-            <img src="https://images.unsplash.com/photo-1514995669114-9cbf9e54a47e?auto=format&fit=crop&w=800&q=80" alt="Relaxed home style" loading="lazy" />
-          </div>
+    <div class="cta__header">
+      <h2 class="cta__title">Find something you love.</h2>
+      <p class="cta__subtitle">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis sapien
+        facilisis tincidunt pellentesque. In eget ipsum et felis finibus consequat.
+      </p>
+    </div>
+
+    <div class="cta__gallery">
+      <HeroCarousel
+        :images="ctaImages"
+        :center-width="246"
+        :center-height="373"
+        :side-width="209"
+        :side-height="317"
+        side-border="1px solid rgba(240, 238, 239, 1)"
+        :side-overlap="-5"
+        :rect-width="139"
+        :rect-height="196"
+      />
+    </div>
+
+    <div class="cta__action">
+      <BaseButton label="Customize Your Outfit" />
+
+      <div class="cta__shipping-row">
+        <span class="cta__ships-badge">
+          <span class="cta__ships-dot"></span>
+          Ships in 1–2 Days
+        </span>
+        <img src="@/assets/images/payments.png" alt="Payment methods" class="cta__payments" />
+      </div>
+    </div>
+
+    <div class="cta__trust">
+      <div class="cta__trust-item">
+        <div class="cta__trust-icon">
+          <img src="@/assets/icons/car.svg" alt="" />
         </div>
+        <p class="cta__trust-text">FREE Shipping on<br />Orders over $200</p>
+      </div>
+      <div class="cta__trust-item">
+        <div class="cta__trust-icon">
+          <img src="@/assets/icons/shield.svg" alt="" />
+        </div>
+        <p class="cta__trust-text">Over 500+ 5 Star<br />Reviews Online</p>
+      </div>
+      <div class="cta__trust-item">
+        <div class="cta__trust-icon">
+          <img src="@/assets/icons/busket.svg" alt="" />
+        </div>
+        <p class="cta__trust-text">Made ethically<br />and responsibly.</p>
       </div>
     </div>
 
-    <div class="final-cta__support">
-      <div class="final-cta__meta">
-        <span class="meta-item">FREE Shipping on orders over $200</span>
-        <span class="meta-item">Over 500+ 5 Star Reviews Online</span>
-        <span class="meta-item">Made ethically and responsibly</span>
-      </div>
-    </div>
   </section>
 </template>
 
-<style scoped lang="scss">
-.final-cta {
-  padding: 80px 20px;
-  background: #f5efe8;
-}
-
-.final-cta__inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
+<style lang="scss" scoped>
+.product-final-cta {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  padding: 56px 24px 48px;
+  background: linear-gradient(0deg, #F9F0E5 0%, rgba(249, 240, 229, 0.18) 43.05%, rgba(249, 240, 229, 0) 100%);
 }
 
-.final-cta__copy {
-  text-align: left;
+.cta__header {
+  text-align: center;
+  margin-bottom: 32px;
+  max-width: 560px;
 }
 
-.final-cta__copy h2 {
-  margin: 0 0 22px;
-  font-size: 42px;
-  line-height: 1.05;
-  color: #1a1f5e;
-  font-family: 'Sofia Pro', 'Inter', -apple-system, sans-serif;
+.cta__title {
+  font-family: $font-serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: $navy;
+  margin: 0 0 14px;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
 }
 
-.final-cta__copy p {
-  margin: 0 0 28px;
-  color: #6b6b6b;
-  font-size: 16px;
-  line-height: 1.8;
-  max-width: 520px;
+.cta__subtitle {
+  font-family: $font-sans;
+  font-size: 14px;
+  line-height: 1.6;
+  color: $text-dark;
+  margin: 0;
 }
 
-.final-cta__visual {
-  width: 100%;
+.cta__gallery {
+  margin-bottom: 40px;
 }
 
-.image-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: 18px;
-  align-items: end;
+.cta__action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 32px;
 }
 
-.image-card {
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 24px 60px rgba(26, 31, 94, 0.08);
+.cta__shipping-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.image-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+.cta__ships-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: $font-sans;
+  font-size: 12px;
+  color: #3a8a3a;
+  font-weight: 500;
 }
 
-.image-card--left {
-  transform: translateY(32px);
+.cta__ships-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #3a8a3a;
+  flex-shrink: 0;
 }
 
-.image-card--center {
-  grid-row: span 2;
-  min-height: 520px;
+.cta__payments {
+  height: 18px;
+  width: auto;
+  object-fit: contain;
 }
 
-.image-card--right {
-  transform: translateY(18px);
-}
-
-.final-cta__support {
-  margin-top: 56px;
-}
-
-.final-cta__meta {
-  max-width: 900px;
-  margin: 0 auto;
+.cta__trust {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  gap: 48px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.cta__trust-item {
+  display: flex;
   align-items: center;
-  gap: 24px;
-  flex-wrap: wrap;
+  gap: 10px;
+  text-align: center;
 }
 
-.meta-item {
-  color: #1a1f5e;
-  font-weight: 600;
-  font-size: 14px;
+.cta__trust-icon {
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  background-color: rgba(#666666, 0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    opacity: 0.65;
+  }
 }
 
-@media (max-width: 1024px) {
-  .final-cta__inner {
-    gap: 32px;
-  }
-
-  .image-card--center {
-    min-height: 420px;
-  }
+.cta__trust-text {
+  font-family: $font-sans;
+  font-size: 12px;
+  line-height: 1.5;
+  color: $text-dark;
+  margin: 0;
 }
 
-@media (max-width: 768px) {
-  .final-cta {
-    padding: 48px 16px;
+@media (max-width: 640px) {
+  .product-final-cta {
+    padding: 40px 16px 40px;
   }
 
-  .final-cta__inner {
-    grid-template-columns: 1fr;
+  .cta__title {
+    font-size: 26px;
   }
 
-  .image-grid {
-    grid-template-columns: 1fr;
+  .cta__gallery {
+    padding-bottom: 16px;
+    margin-bottom: 0;
   }
 
-  .image-card {
-    transform: none !important;
+  .cta__action {
+    width: 100%;
+    align-items: stretch;
   }
 
-  .image-card--center {
-    min-height: 360px;
-  }
-
-  .final-cta__meta {
+  .cta__trust {
     gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cta__trust-item {
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    flex: 0 0 calc(33% - 12px);
+  }
+
+  .cta__trust-text {
+    font-size: 11px;
   }
 }
 </style>

@@ -25,7 +25,7 @@ $navy: #1a1f5e;         // основной тёмно-синий — кнопк
 $navy-light: #2d3494;   // hover для кнопок
 $cream: #f5efe8;        // фоновый бежевый/кремовый
 $cream-dark: #ede5d8;   // чуть темнее крема для карточек
-$white: #ffffff;
+$white;:$white;
 $text-dark: #1a1a1a;    // основной текст
 $text-gray: #6b6b6b;    // второстепенный текст
 $text-light: #9b9b9b;   // метки, подписи
@@ -128,7 +128,7 @@ $navy: #1a1f5e;
 $navy-light: #2d3494;
 $cream: #f5efe8;
 $cream-dark: #ede5d8;
-$white: #ffffff;
+$white;:$white;
 $text-dark: #1a1a1a;
 $text-gray: #6b6b6b;
 $text-light: #9b9b9b;
@@ -205,7 +205,7 @@ html {
 body {
   font-family: $font-sans;
   color: $text-dark;
-  background-color: $white;
+  background-color: $white;;
   line-height: 1.6;
 }
 
@@ -479,7 +479,7 @@ SCSS структура компонента:
   align-items: center;
   justify-content: space-between;
   padding: 20px 40px;
-  background: $white;
+  background: $white;;
   border-bottom: 1px solid $border;
 
   &__logo { font-size: 24px; font-weight: 700; letter-spacing: 2px; }

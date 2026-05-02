@@ -1,81 +1,86 @@
 <script setup>
-import BaseButton from '../ui/BaseButton.vue'
-import StarRating from '../ui/StarRating.vue'
-import { computed } from 'vue'
+import BaseButton from "../ui/BaseButton.vue";
+import StarRating from "../ui/StarRating.vue";
+import HeroCarousel from "../ui/HeroCarousel.vue";
 
-const props = defineProps({
-  product: {
-    type: Object,
-    required: true,
-  },
-})
+import model1 from "@/assets/images/model-1.png";
+import model0 from "@/assets/images/model-0.png";
+import model4 from "@/assets/images/model-4.png";
 
-const imageEdges = computed(() => props.product?.images?.edges || [])
-const heroImages = computed(() => imageEdges.value.slice(0, 3).map(edge => edge.node.url))
-const logoText = 'BYTEEX'
+const heroImages = [model1, model0, model4];
 </script>
 
 <template>
   <section class="product-hero">
-    
-    <div class="hero-content">
-      
-      <div class="hero-copy">
-         <img src="../../assets/images/LOGO.png" alt="BYTEEX Logo" class="byteex-logo" loading="lazy" />
-        <h1>Don't apologize for being comfortable.</h1>
+    <div class="hero-wrapper container">
+      <img
+        src="@/assets/images/LOGO.png"
+        alt="BYTEEX Logo"
+        class="byteex-logo"
+        loading="lazy"
+      />
 
-        <ul class="hero-list">
-          <li>
-            <span class="icon">✓</span>
-            Beautiful, comfortable loungewear for day or night.
-          </li>
-          <li>
-            <span class="icon">✓</span>
-            No wasteful extras, like tags or plastic packaging.
-          </li>
-          <li>
-            <span class="icon">✓</span>
-            Our signature fabric is incredibly comfortable — unlike anything you've ever felt.
-          </li>
-        </ul>
+      <div class="hero-content">
+        <div class="hero-copy">
+          <h1>Don't apologize for being comfortable.</h1>
 
-        <BaseButton label="Customize Your Outfit →" />
+          <ul class="hero-list">
+            <li>
+              <span class="icon"
+                ><img src="@/assets/icons/sun_moon.svg" alt=""
+              /></span>
+              Beautiful, comfortable loungewear for day or night.
+            </li>
+            <li>
+              <span class="icon"
+                ><img src="@/assets/icons/busket.svg" alt=""
+              /></span>
+              No wasteful extras, like tags or plastic packaging.
+            </li>
+            <li>
+              <span class="icon"
+                ><img src="@/assets/icons/wave.svg" alt=""
+              /></span>
+              Our signature fabric is incredibly comfortable — unlike anything
+              you've ever felt.
+            </li>
+          </ul>
 
-        <div class="testimonial-card">
-          <div class="testimonial-avatar">J</div>
-          <div>
+          <BaseButton label="Customize Your Outfit" />
+
+          <div class="testimonial-card">
             <div class="testimonial-header">
-              <strong>Jane, S.</strong>
-              <StarRating rating="5" reviewCount="One of 500+ 5 Star Reviews Online" />
+              <div class="testimonial-avatar">
+                <img src="@/assets/images/color wheel.png" alt="women photo" />
+              </div>
+              <span class="review-name">Amy P.</span>
+              <StarRating
+                rating="5"
+                reviewCount="One of 500+ 5 Star Reviews Online"
+              />
             </div>
-            <p>Overjoyed with my Loungewear set. I have the jogger and the sweatshirt. Quality product on every level. From the compostable packaging, to the supplied washing bag, even the garments smells like fresh herbs when I first held them.</p>
+            <p>
+              Overjoyed with my Loungewear set. I have the jogger and the
+              sweatshirt. Quality product on every level. From the compostable
+              packaging, to the supplied washing bag, even the garments smells
+              like fresh herbs when I first held them.
+            </p>
           </div>
         </div>
-      </div>
 
-      <div class="hero-visual">
-        <div class="image-stack">
-          <div class="image-card image-card--left" v-if="heroImages[0]">
-            <img :src="heroImages[0]" alt="Product image 1" loading="lazy" />
-          </div>
-          <div class="image-card image-card--center" v-if="heroImages[1]">
-            <img :src="heroImages[1]" alt="Product image 2" loading="lazy" />
-          </div>
-          <div class="image-card image-card--right" v-if="heroImages[2]">
-            <img :src="heroImages[2]" alt="Product image 3" loading="lazy" />
-          </div>
+        <div class="hero-visual">
+          <HeroCarousel
+            :images="heroImages"
+            :center-width="260"
+            :center-height="422"
+            center-border="2.5px solid rgba(240, 238, 239, 0.6)"
+            :side-width="209"
+            :side-height="317"
+            :side-overlap="43"
+            :rect-width="134"
+            :rect-height="189"
+          />
         </div>
-      </div>
-    </div>
-
-    <div class="seen-in">
-      <p>as seen in</p>
-      <div class="seen-in-list">
-        <span>ECO-STYLIST</span>
-        <span>Canadian Living</span>
-        <span>JILLIAN HARRIS</span>
-        <span>THE ECO HUB</span>
-        <span>TRENDHUNTER</span>
       </div>
     </div>
   </section>
@@ -84,20 +89,29 @@ const logoText = 'BYTEEX'
 <style scoped lang="scss">
 .product-hero {
   background: $white;
-  padding: 80px 20px;
+  padding: 33px 0 70px;
+  position: relative;
+}
+
+.hero-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.byteex-logo {
+  width: 200px;
+  height: 35px;
+  margin-bottom: 25px;
+  flex-shrink: 0;
 }
 
 .hero-content {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 48px;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  .byteex-logo{
-    width: 200px;
-    height: 35px;
-  }
+  align-items: start;
 }
 
 .hero-copy {
@@ -106,21 +120,15 @@ const logoText = 'BYTEEX'
   gap: 28px;
 }
 
-.hero-brand {
-  display: inline-block;
-  font-size: 14px;
-  letter-spacing: 3px;
-  color:$navy;
-  text-transform: uppercase;
-}
-
 h1 {
+  font-family: $font-sans;
   font-size: 38px;
   line-height: 45px;
   max-width: 592px;
-  color:$navy;
-  margin: 0;
-  font-family: 'Sofia Pro', 'Inter', -apple-system, sans-serif;
+  color: $navy;
+  margin: 0 0 15px;
+  letter-spacing: 4%;
+  font-weight: 400;
 }
 
 .hero-list {
@@ -128,13 +136,13 @@ h1 {
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 14px;
+  gap: 23px;
 }
 
 .hero-list li {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 17px;
   color: #1a1a1a;
   font-size: 16px;
   line-height: 1.7;
@@ -142,129 +150,82 @@ h1 {
 
 .icon {
   display: inline-flex;
-  min-width: 28px;
-  min-height: 28px;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background:$navy;
-  color: #ffffff;
-  font-size: 14px;
-}
+  background: $cream;
 
-.hero-copy > .base-button {
-  width: fit-content;
+  img {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .testimonial-card {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 18px;
-  align-items: center;
-  padding: 24px;
-  background: #ffffff;
-  border-radius: 16px;
+  position: absolute;
+  bottom: 0;
+  transform: translateY(50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 5px 5px 18px;
+  background: $white;
+  border-radius: 8px;
   box-shadow: 0 14px 40px rgba(26, 31, 94, 0.08);
-  max-width: 620px;
+  max-width: 408px;
+  font-family: $font-sans;
 }
 
 .testimonial-avatar {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background:$navy;
-  color: #ffffff;
+  background: $navy;
+  color: $white;
   display: grid;
   place-items: center;
   font-weight: 700;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 }
 
 .testimonial-header {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 14px;
 }
 
+.review-name {
+  font-family: $font-sans;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 23px;
+  letter-spacing: 0.02em;
+}
+
 .testimonial-card p {
   margin: 0;
-  color: #6b6b6b;
-  font-size: 14px;
-  line-height: 1.75;
+  color: $text-dark;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 23px;
+  font-family: $font-serif;
 }
 
 .hero-visual {
   display: flex;
   justify-content: center;
-}
-
-.image-stack {
-  position: relative;
-  width: min(620px, 100%);
-  min-height: 440px;
-}
-
-.image-card {
-  position: absolute;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #ffffff;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
-}
-
-.image-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.image-card--center {
-  top: 0;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  transform: translateX(-50%);
-  z-index: 2;
-}
-
-.image-card--left {
-  top: 24px;
-  left: 0;
-  width: 58%;
-  height: 62%;
-  z-index: 1;
-}
-
-.image-card--right {
-  bottom: 0;
-  right: 0;
-  width: 52%;
-  height: 58%;
-  z-index: 1;
-}
-
-.seen-in {
-  margin-top: 60px;
-  text-align: center;
-}
-
-.seen-in p {
-  margin: 0 0 18px;
-  font-size: 13px;
-  letter-spacing: 3px;
-  color: #6b6b6b;
-  text-transform: uppercase;
-}
-
-.seen-in-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 24px;
-  color: #6b6b6b;
-  font-size: 14px;
-  font-weight: 600;
+  align-items: flex-start;
+  min-height: 422px;
 }
 
 @media (max-width: 1024px) {
@@ -274,41 +235,47 @@ h1 {
 }
 
 @media (max-width: 860px) {
+  .product-hero {
+    padding: 24px 16px 48px;
+  }
+
+  .hero-wrapper {
+    align-items: center;
+    text-align: center;
+  }
+
+  .byteex-logo {
+    margin-bottom: 20px;
+  }
+
   .hero-content {
     grid-template-columns: 1fr;
+    gap: 32px;
+    width: 100%;
   }
 
   .hero-visual {
     order: -1;
-  }
-
-  .image-card--left {
-    left: 6%;
-    top: 14%;
-    width: 44%;
-    height: 46%;
-  }
-
-  .image-card--center {
+    min-height: auto;
     width: 100%;
-    height: 420px;
-  }
-
-  .image-card--right {
-    right: 8%;
-    bottom: -8%;
-    width: 42%;
-    height: 42%;
-  }
-}
-
-@media (max-width: 640px) {
-  .product-hero {
-    padding: 48px 16px;
   }
 
   .hero-copy {
+    align-items: center;
     gap: 22px;
+  }
+
+  h1 {
+    font-size: 28px;
+    line-height: 36px;
+    text-align: center;
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+
+  .hero-list {
+    text-align: left;
+    width: 100%;
   }
 
   .hero-list li {
@@ -316,21 +283,23 @@ h1 {
   }
 
   .testimonial-card {
-    padding: 20px;
-  }
-
-  .image-stack {
-    min-height: 360px;
-  }
-
-  .image-card--left,
-  .image-card--right {
-    display: none;
-  }
-
-  .image-card--center {
-    position: relative;
+    position: static;
     transform: none;
+    max-width: 100%;
+    width: 100%;
+    padding: 16px;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-copy {
+    max-width: 380px;
+    margin: auto;
+  }
+  h1 {
+    font-size: 24px;
+    line-height: 32px;
   }
 }
 </style>

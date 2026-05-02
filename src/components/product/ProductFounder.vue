@@ -3,170 +3,196 @@ import BaseButton from '../ui/BaseButton.vue'
 </script>
 
 <template>
-  <section class="product-founder">
-    <div class="founder-inner">
-      <div class="founder-visual">
-        <div class="founder-image founder-image--large">
-          <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80" alt="Founder wearing loungewear" loading="lazy" />
-        </div>
-        <div class="founder-image founder-image--small founder-image--top">
-          <img src="https://images.unsplash.com/photo-1495121605193-b116b5b9c5c8?auto=format&fit=crop&w=600&q=80" alt="Loungewear closeup" loading="lazy" />
-        </div>
-        <div class="founder-image founder-image--small founder-image--bottom">
-          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80" alt="Relaxed outfit" loading="lazy" />
-        </div>
+  <section class="founder">
+    <div class="founder__container">
+
+      <div class="founder__images">
+        <img src="@/assets/images/model-1.png" alt="" class="img img--top" />
+        <img src="@/assets/images/model-0.png" alt="" class="img img--main" />
+        <img src="@/assets/images/girl_at_the_window.png" alt="" class="img img--bottom" />
       </div>
 
-      <div class="founder-copy">
-        <p class="founder-label">Be your best self.</p>
-        <h2>Hi! My name’s [Insert Name], and I founded [Insert] in ____.</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis sapien facilisis tincidunt pellentesque. In eget ipsum et felis finibus consequat. Fusce non nibh luctus, dignissim risus quis, bibendum dolor.</p>
-        <p>Donec placerat volutpat ligula, ac consectetur felis varius non. Aliquam a nunc rutrum, porttitor dolor eu, pellentesque est. Vivamus id arcu congue, faucibus libero nec, placerat ligula.</p>
-        <p>Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eu nisl a metus ultrices sodales. Fusce non ante velit. Sed auctor odio eu semper molestie.</p>
-        <p>Nam mattis, sapien eget lobortis fringilla, eros ipsum tristique tellus, ac convallis urna massa at nibh. Duis non fermentum augue. Vivamus laoreet aliquam risus, sed euismod leo aliquam ut.</p>
-        <p>Vivamus in felis eu lacus feugiat aliquam nec in sapien. Cras mattis varius mollis.</p>
-        <BaseButton label="Customize Your Outfit →" />
+      <div class="founder__content">
+        <h2>Be your best self.</h2>
+
+        <p class="lead">
+          Hi! My name's [Insert Name], and I founded [Insert] in _____.
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+          lobortis sapien facilisis tincidunt pellentesque. In eget ipsum et
+          felis finibus consequat.
+        </p>
+        <p>
+          Fusce non nibh luctus, dignissim risus quis, bibendum dolor. Donec
+          placerat volutpat ligula, ac consectetur felis varius non. Aliquam a
+          nunc rutrum, porttitor dolor eu, pellentesque est. Vivamus id arcu
+          congue, faucibus libero nec, placerat ligula.
+        </p>
+        <p>
+          Orci varius natoque penatibus et magnis dis parturient montes,
+          nascetur ridiculus mus. Sed eu nisl a metus ultrices sodales.
+        </p>
+        <p>
+          Fusce non ante velit. Sed auctor odio eu semper molestie. Nam mattis,
+          sapien eget lobortis fringilla, eros ipsum tristique tellus, ac
+          convallis urna massa at nibh.
+        </p>
+        <p>
+          Duis non fermentum augue. Vivamus laoreet aliquam risus, sed euismod
+          leo aliquam ut. Vivamus in felis eu lacus feugiat aliquam nec in
+          sapien.
+        </p>
+        <p>Cras mattis varius mollis.</p>
+        <BaseButton label="Customize Your Outfit" />
       </div>
+
     </div>
   </section>
 </template>
 
 <style scoped lang="scss">
-.product-founder {
+.founder {
   padding: 80px 20px;
-  background: #ffffff;
+  background: #f5f3f4;
 }
 
-.founder-inner {
-  max-width: 1200px;
+.founder__container {
+  max-width: 1100px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  display: flex;
+  gap: 80px;
   align-items: center;
 }
 
-.founder-visual {
+.founder__images {
   position: relative;
-  min-height: 520px;
+  width: 536px;
+  height: 664px;
+  flex-shrink: 0;
 }
 
-.founder-image {
+.img {
   position: absolute;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 24px 60px rgba(26, 31, 94, 0.1);
-}
-
-.founder-image img {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
-  display: block;
 }
 
-.founder-image--large {
-  width: 100%;
-  height: 100%;
-  top: 0;
+.img--main {
+  width: 488px;
+  height: 570px;
+  left: 24px;
+  top: 47px;
+  z-index: 1;
+}
+
+.img--top {
+  width: 165px;
+  height: 175px;
   left: 0;
+  top: 0;
+  z-index: 2;
+  border: 4px solid rgba(240, 238, 239, 1);
 }
 
-.founder-image--small {
-  width: 44%;
-  height: 42%;
+.img--bottom {
+  width: 165px;
+  height: 175px;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  border: 4px solid rgba(240, 238, 239, 1);
 }
 
-.founder-image--top {
-  top: -12%;
-  right: -8%;
+.founder__content {
+  max-width: 619px;
 }
 
-.founder-image--bottom {
-  bottom: -10%;
-  left: 8%;
+.founder__content h2 {
+  font-family: $font-serif;
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: $navy;
 }
 
-.founder-copy {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+.lead {
+  margin-bottom: 16px;
+  color: #666;
+  font-family: $font-sans;
 }
 
-.founder-label {
-  margin: 0;
+.founder__content p {
+  margin-bottom: 12px;
+  color: #777;
+  line-height: 1.6;
+  font-family: $font-sans;
   font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #1a1f5e;
-  font-weight: 700;
 }
 
-h2 {
-  margin: 0;
-  font-size: clamp(2.5rem, 4vw, 3.25rem);
-  line-height: 1.05;
-  color: #1a1f5e;
-  font-family: 'Sofia Pro', 'Inter', -apple-system, sans-serif;
-}
+.btn {
+  margin-top: 20px;
+  background: $navy;
+  color: $white;
+  padding: 14px 28px;
+  border: none;
+  cursor: pointer;
+  font-family: $font-sans;
+  font-size: 15px;
+  transition: opacity 0.2s ease;
 
-.founder-copy p {
-  margin: 0;
-  color: #6b6b6b;
-  line-height: 1.8;
-  font-size: 16px;
-}
-
-@media (max-width: 1024px) {
-  .founder-inner {
-    gap: 32px;
-  }
+  &:hover { opacity: 0.85; }
 }
 
 @media (max-width: 860px) {
-  .founder-inner {
-    grid-template-columns: 1fr;
-  }
-
-  .founder-visual {
-    min-height: 420px;
-  }
-
-  .founder-image--top {
-    top: -8%;
-    right: 0;
-    width: 40%;
-  }
-
-  .founder-image--bottom {
-    bottom: -8%;
-    left: 0;
-    width: 40%;
-  }
-}
-
-@media (max-width: 640px) {
-  .product-founder {
+  .founder {
     padding: 48px 16px;
   }
 
-  .founder-visual {
-    min-height: 320px;
+  .founder__container {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
   }
 
-  .founder-image--large {
-    position: relative;
-    height: 320px;
+  .founder__images {
+    width: 345px;
+    height: 363px;
   }
 
-  .founder-image--top,
-  .founder-image--bottom {
-    position: relative;
-    width: 48%;
-    height: 180px;
-    margin-top: 16px;
+  .img--main {
+    width: 304px;
+    height: 310px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 25px;
+  }
+
+  .img--top {
+    width: 102px;
+    height: 108px;
     left: 0;
+    top: 0;
+  }
+
+  .img--bottom {
+    width: 110px;
+    height: 112px;
     right: 0;
+    bottom: 0;
+  }
+
+  .founder__content {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .founder__content h2 {
+    font-size: 26px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 16px;
   }
 }
 </style>

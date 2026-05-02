@@ -2,7 +2,6 @@
 import { onMounted } from 'vue'
 import { useShopify } from '../composables/useShopify'
 import AppHeader from '../components/layout/AppHeader.vue'
-import AppFooter from '../components/layout/AppFooter.vue'
 import ProductHero from '../components/product/ProductHero.vue'
 import ProductBenefits from '../components/product/ProductBenefits.vue'
 import ProductHowItWorks from '../components/product/ProductHowItWorks.vue'
@@ -26,15 +25,14 @@ onMounted(() => fetchFirstProduct())
     <template v-else-if="product">
       <ProductHero :product="product" />
       <ProductBenefits :product="product" />
+       <ProductFounder />
       <ProductHowItWorks />
-      <ProductFounder />
+     
       <ProductReviews />
       <ProductFAQ />
       <ProductGreenImpact />
       <ProductFinalCTA :product="product" />
     </template>
-
-    <AppFooter />
   </div>
 </template>
 

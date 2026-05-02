@@ -1,6 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
-import BaseButton from '../ui/BaseButton.vue'
+import { computed, ref } from "vue";
 
 const props = defineProps({
   product: {
@@ -8,102 +7,229 @@ const props = defineProps({
     required: false,
     default: () => ({}),
   },
-})
+});
 
-const imageEdges = computed(() => props.product?.images?.edges || [])
-const images = computed(() => imageEdges.value.map(edge => edge.node.url))
-const currentIndex = ref(0)
+const imageEdges = computed(() => props.product?.images?.edges || []);
+const images = computed(() => imageEdges.value.map((edge) => edge.node.url));
+
+const currentIndex = ref(0);
 
 function nextImage() {
-  currentIndex.value = (currentIndex.value + 1) % images.value.length
+  currentIndex.value = (currentIndex.value + 1) % images.value.length;
 }
 
 function prevImage() {
-  currentIndex.value = (currentIndex.value - 1 + images.value.length) % images.value.length
+  currentIndex.value =
+    (currentIndex.value - 1 + images.value.length) % images.value.length;
 }
 
 function selectImage(index) {
-  currentIndex.value = index
+  currentIndex.value = index;
 }
 </script>
 
 <template>
   <section class="product-benefits">
-    <div class="benefits-inner">
+    <div class="seen-in container">
+      <p>as seen in</p>
+      <div class="seen-in-list">
+        <img
+          src="@/assets/images/logos/eco_stylist.png"
+          alt="ECO-STYLIST"
+          style="width: 178px; height: 22px"
+        />
+        <img
+          src="@/assets/images/logos/canadian_living.png"
+          alt="Canadian Living"
+          style="width: 111px; height: 52px"
+        />
+        <img
+          src="@/assets/images/logos/jillian_harris.png"
+          alt="JILLIAN HARRIS"
+          style="width: 271px; height: 53px"
+        />
+        <img
+          src="@/assets/images/logos/the_eco_hub.png"
+          alt="THE ECO HUB"
+          style="width: 194px; height: 37px"
+        />
+        <img
+          src="@/assets/images/logos/trendhunter.png"
+          alt="TRENDHUNTER"
+          style="width: 192px; height: 58px"
+        />
+      </div>
+    </div>
+
+    <div class="benefits-inner container">
       <div class="benefits-copy">
         <p class="section-label">Loungewear you can be proud of.</p>
-        <h2>Comfort without compromise.</h2>
 
         <ul class="benefits-list">
           <li>
-            <span class="benefit-icon">🌿</span>
+            <div class="benefit-icon">
+              <img src="@/assets/icons/busket.svg" alt="icon" />
+            </div>
             <div>
               <strong>Ethically sourced.</strong>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis sapien facilisis tincidunt pellentesque. In eget ipsum et felis finibus consequat.</p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+                lobortis sapien facilisis tincidunt pellentesque. In eget ipsum
+                et felis finibus consequat.
+              </p>
             </div>
           </li>
           <li>
-            <span class="benefit-icon">🤝</span>
+            <div class="benefit-icon">
+              <img src="@/assets/icons/leaf.svg" alt="icon" />
+            </div>
             <div>
               <strong>Responsibly made.</strong>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis sapien facilisis tincidunt pellentesque. In eget ipsum et felis finibus consequat.</p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+                lobortis sapien facilisis tincidunt pellentesque. In eget ipsum
+                et felis finibus consequat.
+              </p>
             </div>
           </li>
           <li>
-            <span class="benefit-icon">✨</span>
+            <div class="benefit-icon">
+              <img src="@/assets/icons/sun_moon.svg" alt="icon" />
+            </div>
             <div>
               <strong>Made for living in.</strong>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis sapien facilisis tincidunt pellentesque. In eget ipsum et felis finibus consequat.</p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+                lobortis sapien facilisis tincidunt pellentesque. In eget ipsum
+                et felis finibus consequat.
+              </p>
             </div>
           </li>
           <li>
-            <span class="benefit-icon">〰️</span>
+            <div class="benefit-icon">
+              <img src="@/assets/icons/wave.svg" alt="icon" />
+            </div>
             <div>
               <strong>Unimaginably comfortable.</strong>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis sapien facilisis tincidunt pellentesque. In eget ipsum et felis finibus consequat.</p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+                lobortis sapien facilisis tincidunt pellentesque. In eget ipsum
+                et felis finibus consequat.
+              </p>
             </div>
           </li>
         </ul>
       </div>
 
       <div class="benefits-slider">
-        <div class="slider-frame">
-          <button class="slider-nav slider-nav--left" type="button" @click="prevImage" aria-label="Previous image">‹</button>
-          <div class="slider-image">
+        <div class="slider-wrap">
+          <button
+            class="slider-arrow slider-arrow--prev"
+            type="button"
+            @click="prevImage"
+            aria-label="Previous image"
+          >
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none">
+              <path
+                d="M9 1L1 9L9 17"
+                stroke="#888"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+
+          <div class="slider-frame">
             <img
               v-if="images.length"
               :src="images[currentIndex]"
               :alt="`Product image ${currentIndex + 1}`"
+              class="slider-frame__img"
               loading="lazy"
+              :key="currentIndex"
             />
             <div v-else class="slider-placeholder">No image available</div>
-          </div>
-          <button class="slider-nav slider-nav--right" type="button" @click="nextImage" aria-label="Next image">›</button>
-        </div>
 
-        <div class="thumbnail-row">
+            <div class="thumbnail-row" v-if="images.length > 1">
+              <button
+                v-for="(src, index) in images"
+                :key="src + index"
+                type="button"
+                class="thumbnail"
+                :class="{ active: index === currentIndex }"
+                @click="selectImage(index)"
+                :aria-label="`Go to image ${index + 1}`"
+              >
+                <img
+                  :src="src"
+                  :alt="`Thumbnail ${index + 1}`"
+                  loading="lazy"
+                />
+              </button>
+            </div>
+          </div>
+
           <button
-            v-for="(src, index) in images"
-            :key="src + index"
+            class="slider-arrow slider-arrow--next"
             type="button"
-            class="thumbnail"
-            :class="{ active: index === currentIndex }"
-            @click="selectImage(index)"
+            @click="nextImage"
+            aria-label="Next image"
           >
-            <img :src="src" :alt="`Thumbnail ${index + 1}`" loading="lazy" />
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none">
+              <path
+                d="M1 1L9 9L1 17"
+                stroke="#888"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </button>
         </div>
-
-        <p class="slider-caption">White Robe</p>
+        <p class="product-name" v-if="props.product?.title">
+          {{ props.product.title }}
+        </p>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped lang="scss">
+.seen-in {
+  text-align: center;
+}
+
+.seen-in p {
+  margin: 0 0 16px;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 3%;
+  color: #868787;
+}
+
+.seen-in-list {
+  height: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 100px;
+
+  img {
+    max-height: 40px;
+    object-fit: contain;
+  }
+}
+
 .product-benefits {
-  padding: 80px 20px;
-  background: #ffffff;
+  padding: 70px 20px;
+  background: linear-gradient(
+    180deg,
+    #f9f0e5 0%,
+    rgba(249, 240, 229, 0.18) 43.05%,
+    rgba(249, 240, 229, 0) 100%
+  );
 }
 
 .benefits-inner {
@@ -122,19 +248,13 @@ function selectImage(index) {
 }
 
 .section-label {
-  margin: 0;
-  font-size: 14px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #1a1f5e;
-}
-
-h2 {
-  margin: 0;
-  font-size: clamp(2rem, 3vw, 3rem);
-  line-height: 1.05;
-  color: #1a1f5e;
-  font-family: 'Sofia Pro', 'Inter', -apple-system, sans-serif;
+  font-family: $font-sans;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: 4%;
+  color: $navy;
+  margin-bottom: 85px;
 }
 
 .benefits-list {
@@ -148,24 +268,36 @@ h2 {
 .benefits-list li {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 16px;
+  gap: 32px;
   align-items: start;
+  font-family: $font-sans;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 23px;
+  letter-spacing: 3%;
 }
 
 .benefit-icon {
-  font-size: 20px;
-  min-width: 36px;
-  min-height: 36px;
-  display: grid;
-  place-items: center;
-  background: #e8e0d8;
-  border-radius: 12px;
+  width: 42px;
+  height: 42px;
+  background: $cream;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .benefits-list strong {
   display: block;
-  color: #1a1f5e;
-  font-size: 16px;
+  color: $navy;
+  font-size: 22px;
+  line-height: 24px;
+  letter-spacing: 4%;
   margin-bottom: 6px;
 }
 
@@ -179,20 +311,44 @@ h2 {
 .benefits-slider {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+}
+
+.slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 31px;
+}
+
+.slider-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .slider-frame {
   position: relative;
-  display: grid;
-  place-items: center;
-  background: #f8f6f2;
-  border-radius: 24px;
+  width: 433px;
+  height: 648px;
+  flex-shrink: 0;
+  border-radius: 4px;
   overflow: hidden;
-  min-height: 420px;
+  background: #f0eeef;
 }
 
-.slider-image img {
+.slider-frame__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -205,75 +361,95 @@ h2 {
   font-size: 16px;
 }
 
-.slider-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(26, 31, 94, 0.9);
-  color: #ffffff;
-  font-size: 26px;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-}
-
-.slider-nav--left {
-  left: 18px;
-}
-
-.slider-nav--right {
-  right: 18px;
-}
-
 .thumbnail-row {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 6px;
+  z-index: 2;
 }
 
 .thumbnail {
-  width: 76px;
-  height: 76px;
-  border: 2px solid transparent;
-  padding: 0;
-  background: transparent;
-  cursor: pointer;
-  border-radius: 16px;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 2px;
   overflow: hidden;
+  border: 1px solid rgba(240, 238, 239, 1);
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  opacity: 0.65;
+  transition: all 0.2s ease;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &.active {
+    opacity: 1;
+    border-color: $white;
+    outline: 1px solid rgba(255, 255, 255, 0.7);
+  }
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
-.thumbnail.active {
-  border-color: #1a1f5e;
-}
-
-.thumbnail img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.slider-caption {
-  margin: 0;
-  color: #6b6b6b;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.product-name {
+  font-family: $font-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 22px;
+  letter-spacing: 3%;
+  text-align: center;
+  margin-top: 13px;
 }
 
 @media (max-width: 1024px) {
   .benefits-inner {
     gap: 32px;
   }
+
+  .slider-frame {
+    width: 360px;
+    height: 540px;
+  }
 }
 
 @media (max-width: 860px) {
   .benefits-inner {
     grid-template-columns: 1fr;
+  }
+
+  .section-label {
+    margin-bottom: 32px;
+    font-size: 28px;
+    line-height: 36px;
+    text-align: center;
+  }
+
+  .benefits-slider {
+    align-items: center;
+  }
+
+  .slider-wrap {
+    gap: 25px;
+  }
+
+  .slider-frame {
+    width: 303px;
+    height: 453px;
+  }
+
+  .thumbnail {
+    width: 23px;
+    height: 23px;
   }
 }
 
@@ -282,19 +458,22 @@ h2 {
     padding: 48px 16px;
   }
 
-  .slider-frame {
-    min-height: 300px;
+  .seen-in-list {
+    height: auto;
+    margin-bottom: 48px;
+    gap: 16px;
+
+    img {
+      max-width: 120px;
+    }
   }
 
-  .slider-nav {
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
+  .benefits-list li {
+    gap: 16px;
   }
 
-  .thumbnail {
-    width: 62px;
-    height: 62px;
+  .benefits-list strong {
+    font-size: 18px;
   }
 }
 </style>

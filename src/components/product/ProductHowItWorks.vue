@@ -1,42 +1,88 @@
 <script setup>
-import BaseButton from '../ui/BaseButton.vue'
+import { ref } from 'vue'
+import BaseButton from "../ui/BaseButton.vue";
+import busketIcon from '@/assets/icons/busket.svg'
+import CarIcon from '@/assets/icons/car.svg'
+import sunMoonIcon from '@/assets/icons/sun_moon.svg'
+
+const cards = [
+  {
+    icon: busketIcon,
+    title: 'You save.',
+    text: 'Browse our store and find something you love.',
+    highlight: false,
+  },
+  {
+    icon: CarIcon,
+    title: 'We ship.',
+    text: 'We ship your items within 1–2 days of receiving your order.',
+    highlight: true,
+  },
+  {
+    icon: sunMoonIcon,
+    title: 'You enjoy!',
+    text: 'Wear harness around the house, out on the town, or in bed.',
+    highlight: false,
+  },
+]
+
+const mobileIndex = ref(0)
+const prevCard = () => { mobileIndex.value = (mobileIndex.value - 1 + cards.length) % cards.length }
+const nextCard = () => { mobileIndex.value = (mobileIndex.value + 1) % cards.length }
 </script>
 
 <template>
-  <section class="product-how-it-works">
+  <section class="product-how-it-works container">
     <div class="how-inner">
+
       <div class="how-header">
         <p>Comfort made easy</p>
       </div>
 
-      <div class="how-cards">
-        <article class="how-card">
-          <div class="how-icon">🛒</div>
-          <h3>You save.</h3>
-          <p>Browse our comfort sets and save 15% when you bundle.</p>
-        </article>
-
-        <article class="how-card how-card--highlight">
-          <div class="how-icon">🚚</div>
-          <h3>We ship.</h3>
-          <p>We ship your items within 1–2 days of receiving your order.</p>
-        </article>
-
-        <article class="how-card">
-          <div class="how-icon">☀️</div>
-          <h3>You enjoy!</h3>
-          <p>Wear harness around the house, out on the town, or in bed.</p>
+      <div class="how-cards how-cards--desktop">
+        <article
+          v-for="card in cards"
+          :key="card.title"
+          class="how-card"
+          :class="{ 'how-card--highlight': card.highlight }"
+        >
+          <img :src="card.icon" alt="icon" class="how-icon" />
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.text }}</p>
         </article>
       </div>
 
+      <div class="how-cards--mobile">
+        <button class="how-arrow" @click="prevCard" aria-label="Previous">
+          <svg width="10" height="18" viewBox="0 0 10 18" fill="none">
+            <path d="M9 1L1 9L9 17" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <article
+          class="how-card how-card--mobile-single"
+          :class="{ 'how-card--highlight': cards[mobileIndex].highlight }"
+        >
+          <img :src="cards[mobileIndex].icon" alt="icon" class="how-icon" />
+          <h3>{{ cards[mobileIndex].title }}</h3>
+          <p>{{ cards[mobileIndex].text }}</p>
+        </article>
+
+        <button class="how-arrow" @click="nextCard" aria-label="Next">
+          <svg width="10" height="18" viewBox="0 0 10 18" fill="none">
+            <path d="M1 1L9 9L1 17" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
       <div class="how-footer">
-        <BaseButton label="Customize Your Outfit →" />
-        <p class="how-subtext">Click below to browse our collection and save 15% on your set.</p>
+        <BaseButton label="Customize Your Outfit" />
         <div class="how-rating">
           <span class="stars">★★★★★</span>
           <span>Over 500+ 5 Star Reviews Online</span>
         </div>
       </div>
+
     </div>
   </section>
 </template>
@@ -44,7 +90,7 @@ import BaseButton from '../ui/BaseButton.vue'
 <style scoped lang="scss">
 .product-how-it-works {
   padding: 80px 20px;
-  background: #ffffff;
+  background: $white;
 }
 
 .how-inner {
@@ -57,73 +103,75 @@ import BaseButton from '../ui/BaseButton.vue'
 
 .how-header p {
   margin: 0 auto;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: #1a1f5e;
-  font-weight: 700;
+  font-family: $font-sans;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: $navy;
 }
 
-.how-cards {
+.how-cards--desktop {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
 
+.how-cards--mobile {
+  display: none;
+}
+
 .how-card {
-  padding: 32px;
-  border-radius: 20px;
-  background: #ede5d8;
+  padding: 75px 24px 18px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  min-height: 240px;
+  gap: 14px;
+  height: 346px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(237, 237, 237, 1);
+  background: rgba(240, 238, 239, 1);
 }
 
 .how-card--highlight {
-  background: #f5efe8;
+  background: $peach;
 }
 
 .how-icon {
-  width: 52px;
-  height: 52px;
-  display: grid;
-  place-items: center;
-  border-radius: 16px;
-  background: #1a1f5e;
-  color: #ffffff;
-  font-size: 22px;
+  min-width: 50px;
 }
 
 .how-card h3 {
   margin: 0;
-  font-size: 20px;
-  color: #1a1f5e;
-  font-family: 'Sofia Pro', 'Inter', -apple-system, sans-serif;
+  color: $navy;
+  font-family: $font-sans;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 40px;
+  letter-spacing: 0.04em;
+  text-align: center;
 }
 
 .how-card p {
   margin: 0;
-  color: #6b6b6b;
-  line-height: 1.8;
+  font-family: $font-sans;
+  font-weight: 400;
   font-size: 15px;
+  line-height: 23px;
+  letter-spacing: 0.03em;
+  text-align: center;
+  color: #6b6b6b;
 }
 
 .how-footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 11px;
   flex-wrap: wrap;
-}
-
-.how-subtext {
-  margin: 0;
-  max-width: 520px;
-  color: #6b6b6b;
-  font-size: 15px;
-  line-height: 1.75;
-  text-align: center;
+  flex-direction: column;
 }
 
 .how-rating {
@@ -133,6 +181,7 @@ import BaseButton from '../ui/BaseButton.vue'
   color: #6b6b6b;
   font-size: 14px;
   font-weight: 600;
+  margin: auto;
 }
 
 .stars {
@@ -140,18 +189,48 @@ import BaseButton from '../ui/BaseButton.vue'
   letter-spacing: 2px;
 }
 
+.how-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+
+  &:hover { opacity: 1; }
+  svg { display: block; }
+}
+
 @media (max-width: 860px) {
-  .how-cards {
-    grid-template-columns: 1fr;
+  .how-cards--desktop {
+    display: none;
+  }
+
+  .how-cards--mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .how-card--mobile-single {
+    width: 288px;
+    height: 288px;
+    padding: 24px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    border: 1px solid rgba(237, 237, 237, 1);
   }
 
   .how-footer {
     flex-direction: column;
     align-items: stretch;
-  }
-
-  .how-footer BaseButton {
-    width: 100%;
   }
 }
 
@@ -160,8 +239,9 @@ import BaseButton from '../ui/BaseButton.vue'
     padding: 48px 16px;
   }
 
-  .how-card {
-    padding: 24px;
+  .how-header p {
+    font-size: 26px;
+    line-height: 34px;
   }
 
   .how-footer {

@@ -6,9 +6,9 @@ const props = defineProps({
   },
   href: {
     type: String,
-    default: '',
+    default: "",
   },
-})
+});
 </script>
 
 <template>
@@ -18,27 +18,34 @@ const props = defineProps({
     class="base-button"
   >
     <span>{{ label }}</span>
-    <span class="arrow">→</span>
+    <img src="@/assets/icons/arrow.svg" alt="arrow" />
   </component>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .base-button {
+  margin: auto;
+  height: 56px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 32px;
+  padding: 16px 43px 22px;
   border-radius: 4px;
   border: none;
-  background: #1a1f5e;
-  color: #ffffff;
-  font-family: 'Sofia Pro', 'Inter', -apple-system, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  background: $navy;
+  color: $white;
+  font-family: $font-sans;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.18s ease, background-color 0.18s ease;
+  transition:
+  transform 0.18s ease,
+  background-color 0.18s ease;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 3%;
+  text-align: center;
 }
 
 .base-button:hover {
@@ -54,5 +61,10 @@ const props = defineProps({
 .arrow {
   display: inline-block;
   transform: translateX(1px);
+}
+@media (max-width: 640px) {
+  .base-button{
+    width: 369px !important;
+  }
 }
 </style>

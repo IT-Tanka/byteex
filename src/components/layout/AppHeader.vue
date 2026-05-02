@@ -1,93 +1,64 @@
 <template>
   <header class="app-header">
-    <div class="announcement-bar">
-      CONSCIOUSLY MADE BUTTER SOFT STAPLES FOR EVERY DAY (OR NIGHT) | FREE SHIPPING on orders > $200 | easy 45 day return window.
-    </div>
-    
+    <p class="header-text full-text">
+      CONSCIOUSLY MADE BUTTER SOFT STAPLES FOR EVERY DAY (OR NIGHT) 
+      <span class="separator">|</span> 
+      FREE SHIPPING on orders > $200 
+      <span class="separator">|</span> 
+      easy 45 day return window
+    </p>
+
+    <p class="header-text short-text">
+      FREE SHIPPING on orders > $200
+    </p>
   </header>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style scoped lang="scss">
 .app-header {
-  .announcement-bar {
-    background: #f5efe8;
-    color: #6b6b6b;
-    text-align: center;
-    padding: 8px 20px;
-    font-size: 12px;
-    letter-spacing: 0.2px;
-  }
+  background: $peach;
+  color: rgba(86, 86, 86, 0.5);
+  text-align: center;
+  font-family: $font-serif;
+  font-size: 11px;
+  line-height: 35px;
+  letter-spacing: 0.08em;
+  padding: 0;
+  overflow: hidden;
+}
 
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 40px;
-    background: #ffffff;
-    border-bottom: 1px solid #e8e0d8;
-  }
+.header-text {
+  margin: 0;
+  padding: 0 10px;
+}
 
-  .logo {
-    font-family: 'Sofia Pro', 'Inter', -apple-system, sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: #1a1f5e;
-  }
+.separator {
+  padding: 0 8px;
+}
 
-  .nav-links {
-    display: flex;
-    gap: 32px;
-    align-items: center;
-  }
+.full-text {
+  display: block;
+}
 
-  .nav-links a {
-    color: #1a1a1a;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
+.short-text {
+  display: none;
+}
 
-  .nav-links a:hover {
-    color: #2d3494;
-  }
-
-  .burger {
+@media (max-width: 480px) {
+  .full-text {
     display: none;
-    width: 32px;
-    height: 28px;
-    padding: 0;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    flex-direction: column;
-    justify-content: space-between;
   }
-
-  .burger span {
+  .short-text {
     display: block;
-    height: 3px;
-    width: 100%;
-    background: #1a1f5e;
-    border-radius: 2px;
   }
 }
 
-@media (max-width: 768px) {
-  .app-header .header-inner {
-    padding: 16px 20px;
-  }
-
-  .app-header .nav-links {
-    display: none;
-  }
-
-  .app-header .burger {
-    display: flex;
+@media (max-width: 360px) {
+  .app-header {
+    font-size: 10px;
+    line-height: 32px;
   }
 }
 </style>

@@ -30,7 +30,7 @@ html {
 body {
   font-family: $font-sans;
   color: $text-dark;
-  background-color: $white;
+  background-color: $white;;
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
@@ -64,4 +64,8 @@ a {
 h1, h2, h3, h4 {
   font-family: $font-serif;
   line-height: 1.2;
+}
+.container{
+  max-width: 1464px;
+  margin: 0 auto;
 }

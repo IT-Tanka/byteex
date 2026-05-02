@@ -29,28 +29,30 @@ const stars = Array.from({ length: 5 }, (_, index) => index < props.rating)
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .star-rating {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-family: 'Sofia Pro', 'Inter', -apple-system, sans-serif;
+  gap: 7px;
+  font-family: $font-serif;
+  margin: auto;
 }
 
 .stars {
   display: flex;
-  gap: 4px;
+  gap: 2px;
 }
 
 .star {
-  color: #f4a623;
-  font-size: 18px;
+  color: #FFB801;
+  font-size: 10px;
   line-height: 1;
 }
 
 .review-text {
   margin: 0;
-  color: #1a1a1a;
-  font-size: 14px;
+  color: #828282;
+  font-size: 11px;
+  line-height: 20px;
 }
 </style>

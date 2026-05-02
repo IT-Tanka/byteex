@@ -6,21 +6,27 @@
       </div>
       <div class="green-impact__stats">
         <div class="impact-card">
-          <div class="impact-icon">☁️</div>
+          <div class="impact-icon">
+            <img src="@/assets/icons/co2.svg" alt="CO2" />
+          </div>
           <div>
             <p class="impact-number">3,927 kg</p>
             <p class="impact-text">of CO2 saved</p>
           </div>
         </div>
         <div class="impact-card">
-          <div class="impact-icon">💧</div>
+          <div class="impact-icon">
+            <img src="@/assets/icons/h2O.svg" alt="H2O" />
+          </div>
           <div>
             <p class="impact-number">2,546,167 days</p>
             <p class="impact-text">of drinking water saved</p>
           </div>
         </div>
         <div class="impact-card">
-          <div class="impact-icon">⚡</div>
+          <div class="impact-icon">
+            <img src="@/assets/icons/lightning.svg" alt="Lightning" />
+          </div>
           <div>
             <p class="impact-number">7,321 kWh</p>
             <p class="impact-text">of energy saved</p>
@@ -44,63 +50,78 @@
 }
 
 .green-impact__label {
-  margin: 0 auto 32px;
-  color: #6b6b6b;
-  font-size: 18px;
-  letter-spacing: 0.04em;
-  font-weight: 500;
+  margin: 0 auto 26px;
+  font-family: $font-sans;
+  font-weight: 400;
+  color: $navy;
+  font-size: 25px;
+  line-height: 40px;
+  letter-spacing: 4%;
+  text-align: center;
 }
 
 .green-impact__stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-  align-items: stretch;
+  grid-template-columns: repeat(3, 257px);
+  gap: 1px;
+  margin: 0 auto;
+  align-items: center;
+  width: fit-content;
 }
 
 .impact-card {
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 28px 24px;
-  background: #ffffff;
-  border-radius: 18px;
-  box-shadow: 0 24px 60px rgba(26, 31, 94, 0.08);
+  flex-direction: column;
+  gap: 13px;
+  width: 257px;
+  padding: 12px 26px;
+  color: $navy;
+
+  &:nth-child(2) {
+    border-left: 1px solid rgba(196, 196, 196, 0.5);
+    border-right: 1px solid rgba(196, 196, 196, 0.5);
+  }
 }
 
 .impact-icon {
   flex-shrink: 0;
-  width: 56px;
-  height: 56px;
-  display: grid;
-  place-items: center;
-  background: #1a1f5e;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e4e4e4;
   border-radius: 50%;
-  color: #ffffff;
-  font-size: 24px;
+
+  img {
+    width: 80%;
+    max-height: 28px;
+    height: auto;
+  }
 }
 
 .impact-number {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 700;
-  color: #1a1f5e;
+  font-family: $font-sans;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 25px;
+  letter-spacing: 2%;
+  text-align: center;
 }
 
 .impact-text {
-  margin: 6px 0 0;
-  color: #6b6b6b;
+  font-family: $font-sans;
+  font-weight: 400;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 25px;
+  letter-spacing: 3%;
+  text-align: center;
 }
 
 @media (max-width: 1024px) {
   .green-impact {
     padding: 56px 16px;
-  }
-
-  .green-impact__stats {
-    gap: 18px;
   }
 }
 
@@ -110,7 +131,48 @@
   }
 
   .green-impact__stats {
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+  }
+
+  .impact-card {
+    width: auto;
+    padding: 12px 8px;
+  }
+
+  .impact-number {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .impact-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .green-impact__stats {
     grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .impact-card {
+    width: 100%;
+    padding: 16px;
+
+    &:nth-child(2) {
+      border-left: none;
+      border-right: none;
+      border-top: 1px solid rgba(196, 196, 196, 0.5);
+      border-bottom: 1px solid rgba(196, 196, 196, 0.5);
+      padding: 24px 16px;
+    }
+  }
+
+  .impact-number {
+    font-size: 20px;
+    line-height: 24px;
   }
 }
 </style>
