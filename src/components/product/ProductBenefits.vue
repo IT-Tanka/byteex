@@ -1,5 +1,11 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, onMounted, onUnmounted } from "vue";
+
+import ecoStylist from "@/assets/images/logos/eco_stylist.png";
+import canadianLiving from "@/assets/images/logos/canadian_living.png";
+import jillianHarris from "@/assets/images/logos/jillian_harris.png";
+import theEcoHub from "@/assets/images/logos/the_eco_hub.png";
+import trendhunter from "@/assets/images/logos/trendhunter.png";
 
 const props = defineProps({
   product: {
@@ -26,13 +32,52 @@ function prevImage() {
 function selectImage(index) {
   currentIndex.value = index;
 }
+
+const logos = [
+  { src: ecoStylist, alt: "ECO-STYLIST", width: 178, height: 22 },
+  { src: canadianLiving, alt: "Canadian Living", width: 111, height: 52 },
+  { src: jillianHarris, alt: "JILLIAN HARRIS", width: 271, height: 53 },
+  { src: theEcoHub, alt: "THE ECO HUB", width: 194, height: 37 },
+  { src: trendhunter, alt: "TRENDHUNTER", width: 192, height: 58 },
+];
+
+function getLogosPerSlide() {
+  return window.innerWidth <= 640 ? 3 : 4;
+}
+
+const logosPerSlide = ref(getLogosPerSlide());
+const logoSlideIndex = ref(0);
+
+const totalLogoSlides = computed(() =>
+  Math.ceil(logos.length / logosPerSlide.value)
+);
+
+const visibleLogos = computed(() =>
+  logos.slice(
+    logoSlideIndex.value * logosPerSlide.value,
+    logoSlideIndex.value * logosPerSlide.value + logosPerSlide.value
+  )
+);
+
+function onResize() {
+  const next = getLogosPerSlide();
+  if (next !== logosPerSlide.value) {
+    logosPerSlide.value = next;
+    logoSlideIndex.value = 0;
+  }
+}
+
+onMounted(() => window.addEventListener("resize", onResize));
+onUnmounted(() => window.removeEventListener("resize", onResize));
 </script>
 
 <template>
   <section class="product-benefits">
     <div class="seen-in container">
       <p>as seen in</p>
-      <div class="seen-in-list">
+
+      <!-- Desktop: все логотипы сразу -->
+      <div class="seen-in-list seen-in-list--desktop">
         <img
           src="@/assets/images/logos/eco_stylist.png"
           alt="ECO-STYLIST"
@@ -58,6 +103,30 @@ function selectImage(index) {
           alt="TRENDHUNTER"
           style="width: 192px; height: 58px"
         />
+      </div>
+
+      <!-- Mobile: слайдер по 3 логотипа -->
+      <div class="seen-in-slider">
+        <div class="seen-in-slider__track">
+          <img
+            v-for="logo in visibleLogos"
+            :key="logo.alt"
+            :src="logo.src"
+            :alt="logo.alt"
+            :style="{ width: logo.width + 'px', height: logo.height + 'px' }"
+          />
+        </div>
+        <div class="seen-in-slider__dots">
+          <button
+            v-for="i in totalLogoSlides"
+            :key="i"
+            type="button"
+            class="logo-dot"
+            :class="{ active: logoSlideIndex === i - 1 }"
+            @click="logoSlideIndex = i - 1"
+            :aria-label="`Slide ${i}`"
+          />
+        </div>
       </div>
     </div>
 
@@ -220,6 +289,48 @@ function selectImage(index) {
   img {
     max-height: 40px;
     object-fit: contain;
+  }
+}
+
+// Mobile logo slider — скрыт на десктопе
+.seen-in-slider {
+  display: none;
+}
+
+.seen-in-slider__track {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 16px;
+  min-height: 60px;
+
+  img {
+    max-height: 40px;
+    max-width: 120px;
+    object-fit: contain;
+  }
+}
+
+.seen-in-slider__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 48px;
+}
+
+.logo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ccc;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &.active {
+    background: #555;
   }
 }
 
@@ -478,19 +589,19 @@ function selectImage(index) {
   }
 }
 
+@media (max-width: 960px) {
+  .seen-in-list--desktop {
+    display: none;
+  }
+
+  .seen-in-slider {
+    display: block;
+  }
+}
+
 @media (max-width: 640px) {
   .product-benefits {
     padding: 110px 16px;
-  }
-
-  .seen-in-list {
-    height: auto;
-    margin-bottom: 48px;
-    gap: 16px;
-
-    img {
-      max-width: 120px;
-    }
   }
 
   .benefits-list li {
