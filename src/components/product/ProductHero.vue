@@ -152,7 +152,7 @@ const carouselProps = computed(() => {
   width: 200px;
   height: 35px;
   margin-bottom: 55px;
-  margin-left: 63px;
+  margin-left: 15px;
   flex-shrink: 0;
 }
 
@@ -166,11 +166,9 @@ const carouselProps = computed(() => {
 .hero-copy {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 25px;
   max-width: 480px;
-  padding-bottom: 50px h1 {
-    display: none;
-  }
+
 }
 
 h1 {

@@ -68,7 +68,9 @@ const images = [
 ];
 
 const currentReviewStart = ref(0);
-const windowWidth = ref(typeof window !== "undefined" ? window.innerWidth : 1464);
+const windowWidth = ref(
+  typeof window !== "undefined" ? window.innerWidth : 1464,
+);
 
 function updateWidth() {
   windowWidth.value = window.innerWidth;
@@ -370,15 +372,25 @@ function prevReview() {
   .review-cards {
     grid-template-columns: 1fr;
   }
+  .product-reviews {
+    padding-top: 0;
+  }
+
+  .reviews-header h2 {
+    font-size: 26px;
+    line-height: 40px;
+    letter-spacing: 4%;
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
-  .product-reviews {
-    padding: 48px 16px;
-  }
 
   .ugc-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr)); /* 4 колонки сохраняются и на самых маленьких экранах */
+    grid-template-columns: repeat(
+      4,
+      minmax(0, 1fr)
+    ); /* 4 колонки сохраняются и на самых маленьких экранах */
   }
 
   .reviews-carousel {

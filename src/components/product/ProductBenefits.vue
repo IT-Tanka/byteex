@@ -49,14 +49,14 @@ const logosPerSlide = ref(getLogosPerSlide());
 const logoSlideIndex = ref(0);
 
 const totalLogoSlides = computed(() =>
-  Math.ceil(logos.length / logosPerSlide.value)
+  Math.ceil(logos.length / logosPerSlide.value),
 );
 
 const visibleLogos = computed(() =>
   logos.slice(
     logoSlideIndex.value * logosPerSlide.value,
-    logoSlideIndex.value * logosPerSlide.value + logosPerSlide.value
-  )
+    logoSlideIndex.value * logosPerSlide.value + logosPerSlide.value,
+  ),
 );
 
 function onResize() {
@@ -64,6 +64,25 @@ function onResize() {
   if (next !== logosPerSlide.value) {
     logosPerSlide.value = next;
     logoSlideIndex.value = 0;
+  }
+}
+
+// Touch swipe for logo slider
+const touchStartX = ref(0);
+
+function onTouchStart(e) {
+  touchStartX.value = e.touches[0].clientX;
+}
+
+function onTouchEnd(e) {
+  const delta = touchStartX.value - e.changedTouches[0].clientX;
+  if (Math.abs(delta) < 30) return;
+  if (delta > 0) {
+    logoSlideIndex.value = (logoSlideIndex.value + 1) % totalLogoSlides.value;
+  } else {
+    logoSlideIndex.value =
+      (logoSlideIndex.value - 1 + totalLogoSlides.value) %
+      totalLogoSlides.value;
   }
 }
 
@@ -107,7 +126,11 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
 
       <!-- Mobile: слайдер по 3 логотипа -->
       <div class="seen-in-slider">
-        <div class="seen-in-slider__track">
+        <div
+          class="seen-in-slider__track"
+          @touchstart.passive="onTouchStart"
+          @touchend.passive="onTouchEnd"
+        >
           <img
             v-for="logo in visibleLogos"
             :key="logo.alt"
@@ -264,12 +287,12 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
     </div>
   </section>
   <div class="mobile-footer">
-        <BaseButton label="Customize Your Outfit" />
-        <div class="mobile-rating">
-          <span class="stars">★★★★★</span>
-          <span>Over 500+ 5 Star Reviews Online</span>
-        </div>
-      </div>
+    <BaseButton label="Customize Your Outfit" />
+    <div class="mobile-rating">
+      <span class="stars">★★★★★</span>
+      <span>Over 500+ 5 Star Reviews Online</span>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -298,7 +321,7 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
     object-fit: contain;
   }
 }
-.mobile-footer{
+.mobile-footer {
   display: none;
 }
 
@@ -548,10 +571,10 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
 }
 
 @media (max-width: 860px) {
-  .product-benefits{
+  .product-benefits {
     padding-top: 90px;
   }
-  .first{
+  .first {
     display: none;
   }
   .hidden {
@@ -560,6 +583,18 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
   .benefits-inner {
     grid-template-columns: 1fr;
     padding-left: 0;
+    padding-right: 0;
+  }
+  .seen-in {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .seen-in p {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: 3%;
+    text-align: center;
   }
 
   .section-label {
@@ -583,14 +618,13 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
     grid-template-columns: none;
     text-align: center;
     margin: auto;
-    padding: 10px 30px 20px;
-    
-     &:not(:last-child)  {
+    padding: 10px 30px 50px;
+
+    &:not(:last-child) {
       border-bottom: 1px solid rgba(237, 237, 237, 1);
-      padding: 10px 30px 50px;
     }
   }
-  .benefit-icon{
+  .benefit-icon {
     margin: auto;
   }
   .slider-frame {
@@ -611,23 +645,21 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
     flex-direction: column;
   }
   .mobile-rating {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #6b6b6b;
-  font-size: 14px;
-  font-weight: 600;
-  margin: auto;
-  text-align: center;
-  margin-bottom: 43px;
-  
-}
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #6b6b6b;
+    font-size: 14px;
+    font-weight: 600;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 43px;
+  }
 
-.stars {
-  color: rgba(255, 184, 1, 1);
-  letter-spacing: 2px;
-}
-
+  .stars {
+    color: rgba(255, 184, 1, 1);
+    letter-spacing: 2px;
+  }
 }
 
 @media (max-width: 960px) {
@@ -642,7 +674,17 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
 
 @media (max-width: 640px) {
   .product-benefits {
-    padding: 110px 16px;
+    padding: 110px 16px 0;
+  }
+
+  .seen-in {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .benefits-inner {
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .benefits-list li {
@@ -653,15 +695,12 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
     font-size: 18px;
   }
   .mobile-footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 11px;
-  flex-wrap: wrap;
-  flex-direction: column;
-}
-
-
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
 }
 </style>

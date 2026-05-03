@@ -5,7 +5,7 @@ import BaseButton from '../ui/BaseButton.vue'
 <template>
   <section class="founder">
     <div class="founder__container">
-
+<h2 class="hidden">Be your best self.</h2>
       <div class="founder__images">
         <img src="@/assets/images/model-1.png" alt="" class="img img--top" />
         <img src="@/assets/images/model-0.png" alt="" class="img img--main" />
@@ -108,9 +108,12 @@ import BaseButton from '../ui/BaseButton.vue'
   max-width: 619px;
 }
 
-.founder__content h2 {
-  font-family: $font-serif;
+ h2 {
+  font-family: $font-sans;
   font-size: 32px;
+  line-height: 40px;
+  letter-spacing: 4%;
+  font-weight: 400;
   margin-bottom: 20px;
   color: $navy;
 }
@@ -132,6 +135,10 @@ import BaseButton from '../ui/BaseButton.vue'
 
 
 @media (max-width: 860px) {
+  .hidden {
+    display: block;
+    font-size: 26px;
+  }
   .founder {
     padding: 48px 16px;
   }
@@ -175,7 +182,7 @@ import BaseButton from '../ui/BaseButton.vue'
   }
 
   .founder__content h2 {
-    font-size: 26px;
+    display: none;
   }
 
   .desktop-btn {

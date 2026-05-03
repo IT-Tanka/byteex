@@ -209,7 +209,7 @@ const nextCard = () => { mobileIndex.value = (mobileIndex.value + 1) % cards.len
   svg { display: block; }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1200px) {
   .how-cards--desktop {
     display: none;
   }
@@ -233,6 +233,7 @@ const nextCard = () => { mobileIndex.value = (mobileIndex.value + 1) % cards.len
   .how-footer {
     flex-direction: column;
     align-items: stretch;
+    margin: auto;
   }
 }
 

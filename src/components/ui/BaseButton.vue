@@ -63,9 +63,11 @@ const props = defineProps({
   transform: translateX(1px);
 }
 @media (max-width: 860px) {
-  .base-button{
-    width: 369px !important;
-    margin: auto;
+  .base-button {
+    width: 100%;
+    max-width: 369px;
+    display: flex;
+    margin: 0 auto;
   }
 }
 </style>

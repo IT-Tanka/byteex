@@ -110,6 +110,7 @@ function toggle(index) {
   grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: start;
+  padding-left: 200px;
 }
 
 .faq-copy {
@@ -271,6 +272,7 @@ function toggle(index) {
 @media (max-width: 1024px) {
   .faq-inner {
     gap: 32px;
+    padding-left: 50px;
   }
 
   .collage {
@@ -287,6 +289,7 @@ function toggle(index) {
   .faq-inner {
     grid-template-columns: 1fr;
     gap: 32px;
+    padding-left: 0;
   }
 
   .faq-label {
