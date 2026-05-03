@@ -1,4 +1,5 @@
 <script setup>
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import HeroCarousel from '../ui/HeroCarousel.vue'
 import BaseButton from '../ui/BaseButton.vue'
 
@@ -7,6 +8,40 @@ import model2 from '@/assets/images/model-2.png'
 import model1 from '@/assets/images/model-1.png'
 
 const ctaImages = [model3, model2, model1]
+
+const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1280)
+
+function onResize() {
+  windowWidth.value = window.innerWidth
+}
+
+onMounted(() => window.addEventListener('resize', onResize))
+onUnmounted(() => window.removeEventListener('resize', onResize))
+
+const carouselProps = computed(() => {
+  if (windowWidth.value <= 640) {
+    return {
+      centerWidth: 139,
+      centerHeight: 211,
+      sideWidth: 105,
+      sideHeight: 152,
+      sideBorder: '1px solid rgba(240, 238, 239, 1)',
+      sideOverlap: -5,
+      rectWidth: 67,
+      rectHeight: 95,
+    }
+  }
+  return {
+    centerWidth: 246,
+    centerHeight: 373,
+    sideWidth: 209,
+    sideHeight: 317,
+    sideBorder: '1px solid rgba(240, 238, 239, 1)',
+    sideOverlap: -5,
+    rectWidth: 139,
+    rectHeight: 196,
+  }
+})
 </script>
 
 <template>
@@ -23,14 +58,7 @@ const ctaImages = [model3, model2, model1]
     <div class="cta__gallery">
       <HeroCarousel
         :images="ctaImages"
-        :center-width="246"
-        :center-height="373"
-        :side-width="209"
-        :side-height="317"
-        side-border="1px solid rgba(240, 238, 239, 1)"
-        :side-overlap="-5"
-        :rect-width="139"
-        :rect-height="196"
+        v-bind="carouselProps"
       />
     </div>
 
@@ -201,6 +229,7 @@ const ctaImages = [model3, model2, model1]
   .cta__gallery {
     padding-bottom: 16px;
     margin-bottom: 0;
+    min-height: unset;
   }
 
   .cta__action {

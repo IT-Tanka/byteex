@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref, onMounted, onUnmounted } from "vue";
-
+import BaseButton from "../ui/BaseButton.vue";
 import ecoStylist from "@/assets/images/logos/eco_stylist.png";
 import canadianLiving from "@/assets/images/logos/canadian_living.png";
 import jillianHarris from "@/assets/images/logos/jillian_harris.png";
@@ -263,6 +263,13 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
       </div>
     </div>
   </section>
+  <div class="mobile-footer">
+        <BaseButton label="Customize Your Outfit" />
+        <div class="mobile-rating">
+          <span class="stars">★★★★★</span>
+          <span>Over 500+ 5 Star Reviews Online</span>
+        </div>
+      </div>
 </template>
 
 <style scoped lang="scss">
@@ -291,7 +298,9 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
     object-fit: contain;
   }
 }
-
+.mobile-footer{
+  display: none;
+}
 // Mobile logo slider — скрыт на десктопе
 .seen-in-slider {
   display: none;
@@ -351,6 +360,7 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
   grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: start;
+  padding-left: 110px;
 }
 
 .benefits-copy {
@@ -549,6 +559,7 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
   }
   .benefits-inner {
     grid-template-columns: 1fr;
+    padding-left: 0;
   }
 
   .section-label {
@@ -572,8 +583,11 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
     grid-template-columns: none;
     text-align: center;
     margin: auto;
-    border-bottom: 1px solid rgba(237, 237, 237, 1);
-    padding-bottom: 20px;
+    
+     &:not(:last-child)  {
+      border-bottom: 1px solid rgba(237, 237, 237, 1);
+      padding: 10px 30px 50px;
+    }
   }
   .benefit-icon{
     margin: auto;
@@ -587,6 +601,32 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
     width: 23px;
     height: 23px;
   }
+  .mobile-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .mobile-rating {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #6b6b6b;
+  font-size: 14px;
+  font-weight: 600;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 43px;
+  
+}
+
+.stars {
+  color: rgba(255, 184, 1, 1);
+  letter-spacing: 2px;
+}
+
 }
 
 @media (max-width: 960px) {
@@ -611,5 +651,16 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
   .benefits-list strong {
     font-size: 18px;
   }
+  .mobile-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+
+
 }
 </style>

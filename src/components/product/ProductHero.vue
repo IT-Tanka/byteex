@@ -1,4 +1,5 @@
 <script setup>
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import BaseButton from "../ui/BaseButton.vue";
 import StarRating from "../ui/StarRating.vue";
 import HeroCarousel from "../ui/HeroCarousel.vue";
@@ -8,6 +9,53 @@ import model0 from "@/assets/images/model-0.png";
 import model4 from "@/assets/images/model-4.png";
 
 const heroImages = [model1, model0, model4];
+
+const windowWidth = ref(typeof window !== "undefined" ? window.innerWidth : 1280);
+
+function onResize() {
+  windowWidth.value = window.innerWidth;
+}
+
+onMounted(() => window.addEventListener("resize", onResize));
+onUnmounted(() => window.removeEventListener("resize", onResize));
+
+const carouselProps = computed(() => {
+  const w = windowWidth.value;
+  if (w <= 860) {
+    return {
+      centerWidth: 136,
+      centerHeight: 221,
+      centerBorder: "2.5px solid rgba(240, 238, 239, 0.6)",
+      sideWidth: 110,
+      sideHeight: 166,
+      sideOverlap: 28,
+      rectWidth: 70,
+      rectHeight: 99,
+    };
+  }
+  if (w <= 1100) {
+    return {
+      centerWidth: 200,
+      centerHeight: 325,
+      centerBorder: "2.5px solid rgba(240, 238, 239, 0.6)",
+      sideWidth: 160,
+      sideHeight: 243,
+      sideOverlap: 35,
+      rectWidth: 100,
+      rectHeight: 145,
+    };
+  }
+  return {
+    centerWidth: 260,
+    centerHeight: 422,
+    centerBorder: "2.5px solid rgba(240, 238, 239, 0.6)",
+    sideWidth: 209,
+    sideHeight: 317,
+    sideOverlap: 43,
+    rectWidth: 134,
+    rectHeight: 189,
+  };
+});
 </script>
 
 <template>
@@ -19,10 +67,10 @@ const heroImages = [model1, model0, model4];
         class="byteex-logo"
         loading="lazy"
       />
-
+      <h1 class="hidden">Don't apologize for being comfortable.</h1>
       <div class="hero-content">
         <div class="hero-copy">
-          <h1>Don't apologize for being comfortable.</h1>
+          <h1 class="desktop">Don't apologize for being comfortable.</h1>
 
           <ul class="hero-list">
             <li>
@@ -71,14 +119,7 @@ const heroImages = [model1, model0, model4];
         <div class="hero-visual">
           <HeroCarousel
             :images="heroImages"
-            :center-width="260"
-            :center-height="422"
-            center-border="2.5px solid rgba(240, 238, 239, 0.6)"
-            :side-width="209"
-            :side-height="317"
-            :side-overlap="43"
-            :rect-width="134"
-            :rect-height="189"
+            v-bind="carouselProps"
           />
         </div>
       </div>
@@ -87,6 +128,9 @@ const heroImages = [model1, model0, model4];
 </template>
 
 <style scoped lang="scss">
+.hidden {
+  display: none;
+}
 .product-hero {
   background: $white;
   padding: 33px 62px 70px 106px;
@@ -110,7 +154,7 @@ const heroImages = [model1, model0, model4];
 
 .hero-content {
   display: flex;
-   justify-content: center;
+  justify-content: center;
   gap: 110px;
   align-items: start;
 }
@@ -120,7 +164,9 @@ const heroImages = [model1, model0, model4];
   flex-direction: column;
   gap: 28px;
   max-width: 480px;
-  padding-bottom: 50px
+  padding-bottom: 50px h1 {
+    display: none;
+  }
 }
 
 h1 {
@@ -232,15 +278,30 @@ h1 {
   min-height: 422px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
+  .hero-visual {
+    min-height: 325px;
+  }
+}
+
+@media (max-width: 1100px) {
   .hero-content {
     gap: 32px;
   }
 }
 
 @media (max-width: 860px) {
+  .hero-visual {
+    min-height: unset;
+  }
+}
+
+@media (max-width: 860px) {
+  .hidden {
+    display: block;
+  }
   .product-hero {
-    padding: 24px 16px 48px;
+    padding: 24px 16px 140px;
   }
 
   .hero-wrapper {
@@ -249,7 +310,7 @@ h1 {
   }
 
   .byteex-logo {
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
   }
 
   .hero-content {
@@ -258,21 +319,25 @@ h1 {
 
   .hero-visual {
     order: -1;
-    min-height: auto;
     width: 100%;
   }
 
   .hero-copy {
     align-items: center;
     gap: 22px;
+    h1 {
+      display: none;
+    }
   }
 
   h1 {
-    font-size: 28px;
-    line-height: 36px;
+    font-family: $font-sans;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 34px;
+    letter-spacing: 4%;
     text-align: center;
-    max-width: 100%;
-    margin-bottom: 0;
+    margin-bottom: 17px;
   }
 
   .hero-list {
@@ -295,11 +360,9 @@ h1 {
 }
 
 @media (max-width: 480px) {
-    
   .hero-copy {
     max-width: 380px;
     margin: auto;
-
   }
   h1 {
     font-size: 24px;

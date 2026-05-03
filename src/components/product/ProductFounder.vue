@@ -45,7 +45,7 @@ import BaseButton from '../ui/BaseButton.vue'
           sapien.
         </p>
         <p>Cras mattis varius mollis.</p>
-        <BaseButton label="Customize Your Outfit" />
+        <BaseButton class="desktop-btn" label="Customize Your Outfit" />
       </div>
 
     </div>
@@ -129,19 +129,7 @@ import BaseButton from '../ui/BaseButton.vue'
   font-size: 14px;
 }
 
-.btn {
-  margin-top: 20px;
-  background: $navy;
-  color: $white;
-  padding: 14px 28px;
-  border: none;
-  cursor: pointer;
-  font-family: $font-sans;
-  font-size: 15px;
-  transition: opacity 0.2s ease;
 
-  &:hover { opacity: 0.85; }
-}
 
 @media (max-width: 860px) {
   .founder {
@@ -190,9 +178,8 @@ import BaseButton from '../ui/BaseButton.vue'
     font-size: 26px;
   }
 
-  .btn {
-    width: 100%;
-    padding: 16px;
+  .desktop-btn {
+    display: none
   }
 }
 </style>

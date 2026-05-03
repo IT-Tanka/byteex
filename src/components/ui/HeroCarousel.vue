@@ -192,13 +192,5 @@ const rightIndex = computed(() => (currentIndex.value + 1) % len.value)
 }
 
 
-@media (max-width: 860px) {
-  .carousel__side {
-    display: none;
-  }
 
-  .carousel__rect {
-    display: none;
-  }
-}
 </style>

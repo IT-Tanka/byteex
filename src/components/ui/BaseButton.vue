@@ -62,7 +62,7 @@ const props = defineProps({
   display: inline-block;
   transform: translateX(1px);
 }
-@media (max-width: 640px) {
+@media (max-width: 860px) {
   .base-button{
     width: 369px !important;
     margin: auto;
