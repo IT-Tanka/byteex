@@ -390,7 +390,7 @@ function prevReview() {
     grid-template-columns: repeat(
       4,
       minmax(0, 1fr)
-    ); /* 4 колонки сохраняются и на самых маленьких экранах */
+    ); 
   }
 
   .reviews-carousel {
