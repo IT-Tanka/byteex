@@ -218,6 +218,11 @@ function prevReview() {
   padding: 32px;
   border-radius: 28px;
 }
+.ugc-grid,
+.reviews-carousel {
+  max-width: 100%;
+  overflow: hidden;
+}
 
 .reviews-header h2 {
   font-family: $font-sans;

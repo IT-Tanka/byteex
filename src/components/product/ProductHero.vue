@@ -10,8 +10,12 @@ import model4 from "@/assets/images/model-4.png";
 
 const heroImages = [model1, model0, model4];
 
-const windowWidth = ref(typeof window !== "undefined" ? window.innerWidth : 1280);
 
+const windowWidth = ref(1280)
+onMounted(() => {
+  windowWidth.value = window.innerWidth
+  window.addEventListener('resize', onResize)
+})
 function onResize() {
   windowWidth.value = window.innerWidth;
 }

@@ -9,8 +9,12 @@ import model1 from '@/assets/images/model-1.png'
 
 const ctaImages = [model3, model2, model1]
 
-const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1280)
 
+const windowWidth = ref(1280)
+onMounted(() => {
+  windowWidth.value = window.innerWidth
+  window.addEventListener('resize', onResize)
+})
 function onResize() {
   windowWidth.value = window.innerWidth
 }

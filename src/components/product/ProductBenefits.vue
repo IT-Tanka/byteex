@@ -301,7 +301,7 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
 .mobile-footer{
   display: none;
 }
-// Mobile logo slider — скрыт на десктопе
+
 .seen-in-slider {
   display: none;
 }
@@ -583,6 +583,7 @@ onUnmounted(() => window.removeEventListener("resize", onResize));
     grid-template-columns: none;
     text-align: center;
     margin: auto;
+    padding: 10px 30px 20px;
     
      &:not(:last-child)  {
       border-bottom: 1px solid rgba(237, 237, 237, 1);
